@@ -46,16 +46,18 @@ get '/' => sub {
     template 'hello';
 };
 
+get '/find-tweets/:name' => sub {
+  my $name = params->{name};
+  my $response = $nt->search($name);
+
+  # Dancer adds .tt automatically, but this is configurable
+  template 'hello' => {
+      name => $name,
+      response => $response
+  };
+};
 
 print "@++++++++++++++++@@@\n";
-#get '/user/view/:username/' => sub {
-# get '/hello/:name' => sub {
-#         #return "Why, hello there " . params->{name};
-#         my $name = params->{name};
-#         print $name;
-#         template 'hello' => { name => $name };
-# };
-
 get '/hello/:name' => sub {
   my $name = params->{name};
 
@@ -64,21 +66,19 @@ get '/hello/:name' => sub {
       name => $name,
   };
 };
+
 # get '/tweets' => sub {
 #   my $form = form('search_tweets');
 #   print "here's my form: \n";
 #   print $form;
-
 # };
-print "@@@@@@@@@@@@@@@@@@@\n";
-print "@++++++++++++++++@@@\n";
-
+# print "@++++++++++++++++@@@\n";
 # post '/tweets' => sub {
 #   my $form = form('search_tweets');
 #   my $values = $form->values();
 #   print "here's my form vals: \n";
 #   print $values;
-
 # };
+
 print "@@@@@@@@@@@@@@@@@@@\n";
 true;

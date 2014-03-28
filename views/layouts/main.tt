@@ -38,8 +38,7 @@
           </header>
           
           <content>
-            <% content %> 
-            <% $search_term %>  
+            <% content %>   
           </content>
           
         </article>
