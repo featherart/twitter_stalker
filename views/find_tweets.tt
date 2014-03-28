@@ -1,4 +1,10 @@
 <h3>Here are recent tweets for <% name %>:</h3>
+
 <ul>
-  <li><% response %></li>
+ <% FOREACH status IN response %>
+   <li>
+     The key is: <% status.key %>
+     The value is: <% status.value %>
+   </li>
+ <% END %>
 </ul>

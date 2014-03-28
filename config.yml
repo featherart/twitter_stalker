@@ -7,7 +7,7 @@ appname: "TwitterStalker::App"
 
 # The default layout to use for your application (located in
 # views/layouts/main.tt)
-layout: "main"
+#layout: "main"
 
 # when the charset is set to UTF-8 Dancer will handle for you
 # all the magic of encoding and decoding. You should not care
@@ -17,10 +17,15 @@ charset: "UTF-8"
 # template engine
 # simple: default and very basic template engine
 # template_toolkit: TT
-
 template: "simple"
 
+# Followed instructions here: 
+# http://search.cpan.org/~yanick/Dancer-1.3121/lib/Dancer/Template/TemplateToolkit.pm
+# but that page was lying, the app will not even boot up
 # template: "template_toolkit"
+# engines:
+#         template_toolkit:
+#             WRAPPER: layouts/main.tt
 # engines:
 #   template_toolkit:
 #     start_tag: '[%'
