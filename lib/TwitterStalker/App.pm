@@ -43,11 +43,11 @@ get '/' => sub {
 
 get '/find_tweets/:name' => sub {
 #get '/find_tweets' => sub {
-  # nope
+  # nope, need a form module, couldn't get it
   #my $form = form('find_tweets');
 
-
   my $name = params->{name};
+  #my $name = param "name";
 
   my @r = eval { $nt->search($name) };
     # for my $status ( @{$r->{statuses}} ) {

@@ -17,11 +17,12 @@ charset: "UTF-8"
 # template engine
 # simple: default and very basic template engine
 # template_toolkit: TT
-template: "simple"
+#template: "simple"
 
 # Followed instructions here: 
 # http://search.cpan.org/~yanick/Dancer-1.3121/lib/Dancer/Template/TemplateToolkit.pm
-# but that page was lying, the app will not even boot up
+# but that page left out important info!
+# you have to run 'sudo cpan install Template' first
 template: "template_toolkit"
 engines:
         template_toolkit:
