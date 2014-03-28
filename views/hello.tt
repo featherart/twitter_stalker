@@ -1,5 +1,1 @@
-<h1>Hi <% name %> ,what up?</h1>
-
-<ul>
-  <li><% response %></li>
-</ul>
+<h3>Hi <% name %>! Want to search for recent tweets, or see who two users both follow? You came to the right place!</h3>

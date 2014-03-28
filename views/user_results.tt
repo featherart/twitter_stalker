@@ -1,0 +1,4 @@
+<h3>Here are the common tweeters for <% name1 %> & <% name2 %>:</h3>
+<ul>
+  <li><% response %></li>
+</ul>

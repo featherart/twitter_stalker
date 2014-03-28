@@ -54,8 +54,8 @@ print Dumper $doh;
 #print $res;
 print "@@@@@@@@@@@@@@@@@@@\n";
 print $r;
-my %data = ('John Paul', 45, 'Lisa', 30, 'Kumar', 40);
-print "\$data{'John Paul'} = $data{'John Paul'}\n";
+# my %data = ('John Paul', 45, 'Lisa', 30, 'Kumar', 40);
+# print "\$data{'John Paul'} = $data{'John Paul'}\n";
 
 get '/' => sub {
     # template 'index';
@@ -72,8 +72,21 @@ get '/find-tweets/:name' => sub {
 # }
 
   # Dancer adds .tt automatically, but this is configurable
-  template 'hello' => {
+  template 'tweet_results' => {
       name => $name,
+      response => $response
+  };
+};
+
+get '/user_results/:name1:name2' => sub {
+  my $name1 = params->{name1};
+  my $name2 = params->{name2};
+  my $response = $nt->lookup_users({ screen_name => $name1,$name2 });
+
+  # Dancer adds .tt automatically, but this is configurable
+  template 'user_results' => {
+      name1 => $name1,
+      name2 => $name2,
       response => $response
   };
 };

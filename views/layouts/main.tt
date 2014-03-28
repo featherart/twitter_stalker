@@ -14,15 +14,16 @@
     <nav><ul>
       <li><a href="#">View tweets for a user</a>
       </li>
-      <li><form id="search_tweets" action="/tweets" method="POST">
-            <input type="text" placeholder="user name" id="search_tweets" autofocus="true" length="300">
+      <li><form id="search_tweets" action="/tweets" method="GET">
+            <input type="text" placeholder="user name" id="user" autofocus="true" length="300">
             <input type="submit">
           </form>
       </li>
       <li><a href="#">Find related users</a>
       </li>
-      <li><form id="search_users" action="/users" method="POST">
-        <input type="text" placeholder="second user name" id="search_users">
+      <li><form id="search_users" action="/users" method="GET">
+        <input type="text" placeholder="first user name" id="name1">
+        <input type="text" placeholder="second user name" id="name2">
         <input type="submit">
       </form>
     </li>
@@ -34,7 +35,7 @@
         <article class="topcontent"> 
         
           <header>
-            <h2><a href="#" rel="bookmark" title="Permalink to this POST TITLE">Results:</a></h2>
+            <h2><a href="#" rel="bookmark" title="Permalink to this POST TITLE">Twitter Stalker</a></h2>
           </header>
           
           <content>
