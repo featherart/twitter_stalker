@@ -1,11 +1,13 @@
 <h3>Here are recent tweets for <% name %>:</h3>
 
-<ul>
  <% FOREACH status IN response %>
    <% FOREACH val IN status.value %>
-       ☆ <% val.text %> <br>
-     </li>
+      <% IF val.text %>
+        <div>
+        ☞ <% val.text %> 
+        </div>
+      <% END %>
    <% END %>
  <% END %>
-</ul>
+
 

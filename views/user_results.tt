@@ -1,4 +1,11 @@
-<h3>Here are the common tweeters for <% name1 %> & <% name2 %>:</h3>
-<ul>
-  <li><% response %></li>
-</ul>
+<h3>Here are the tweeters in common for <% name1 %> & <% name2 %>:</h3>
+
+<% FOREACH status IN response %>
+   <% FOREACH val IN status.value %>
+      <% IF val.text %>
+        <div>
+        ☞ <% val.text %> 
+        </div>
+      <% END %>
+   <% END %>
+ <% END %>

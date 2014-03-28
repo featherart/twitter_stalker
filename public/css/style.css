@@ -100,6 +100,7 @@ a:hover, a:active
 {
   list-style: none; 
   margin: 0 auto;
+  list-style-type: none;
 }
 
 .mainHeader nav ul li
