@@ -1,2 +1,5 @@
 <h1>Hi <% name %> ,what up?</h1>
-<p><% response %></p>
+
+<ul>
+  <li><% response %></li>
+</ul>
