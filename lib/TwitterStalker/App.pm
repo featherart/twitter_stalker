@@ -46,6 +46,14 @@ get '/' => sub {
     template 'hello';
 };
 
+get '/checkout' => sub {
+        my $form;
+
+        $form = form('checkout');
+        
+        template 'checkout', {form => $form};
+    };
+
 true;
 
 
