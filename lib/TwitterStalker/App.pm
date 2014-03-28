@@ -49,7 +49,7 @@ get '/find_tweets/:name' => sub {
 
   my $name = params->{name};
 
-  my $r = eval { $nt->search($name) };
+  my @r = eval { $nt->search($name) };
     # for my $status ( @{$r->{statuses}} ) {
     #     print "$status->{text}\n";
     # }
@@ -58,7 +58,7 @@ get '/find_tweets/:name' => sub {
   
   template 'find_tweets' => {
       name => $name,
-      response => $r
+      response => @r
     };
 };
 

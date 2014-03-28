@@ -2,9 +2,10 @@
 
 <ul>
  <% FOREACH status IN response %>
-   <li>
-     The key is: <% status.key %>
-     The value is: <% status.value %>
-   </li>
+   <% FOREACH val IN status.value %>
+       ☆ <% val.text %> <br>
+     </li>
+   <% END %>
  <% END %>
 </ul>
+
