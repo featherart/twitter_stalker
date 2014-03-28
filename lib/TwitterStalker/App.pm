@@ -18,23 +18,14 @@ my $nt = Net::Twitter::Lite::WithAPIv1_1->new(
       access_token_secret => $access_token_secret,
       ssl                 => 1,
 );
-# this causes 403
-#my $res    = $nt->update({ status => "I CAN HAZ OAUTH!" });
-# but this works SO BE CAREFUL
+
+# this works SO BE CAREFUL!
 #$nt->update('Hello World!');
 
 print "*******************\n";
-# print "twitter_secret:      ", $ENV{'TWITTER_KEY'}, "<BR>", "\n";
-# print "hello?:      ", $ENV{'LANG'}, "<BR>", "\n";
-# print $consumer_key, "\n";
-
-my $search_term = "featherart";
-my @tweets = $nt->home_timeline;
-my $r = $nt->search($search_term);
-
-my $doh = $nt->lookup_users({ screen_name => 'featherart,hansflorine' });
-#only prints the users we have in common
-print Dumper $doh;
+# my $doh = $nt->lookup_users({ screen_name => 'featherart,hansflorine' });
+# #only prints the users we have in common
+# print Dumper $doh;
 
 # this might be a way to at least look at the hash!
 # $Data::Dumper::Sortkeys = \&my_filter;
@@ -52,24 +43,18 @@ print Dumper $doh;
 #print %friends[0];
 #print "$tweets[0]\n";
 #print $res;
-print "@@@@@@@@@@@@@@@@@@@\n";
-print $r;
-# my %data = ('John Paul', 45, 'Lisa', 30, 'Kumar', 40);
-# print "\$data{'John Paul'} = $data{'John Paul'}\n";
 
+print "@@@@@@@@@@@@@@@@@@@\n";
 get '/' => sub {
-    # template 'index';
+    # default welcome page
     template 'hello';
 };
 
 get '/find-tweets/:name' => sub {
+  # nope
+  # my $form = form('find_tweets');
   my $name = params->{name};
   my $response = $nt->search($name);
-
-# while ( ($key, $value) = each %hash )
-# {
-#   print "key: $key, value: $hash{$key}\n";
-# }
 
   # Dancer adds .tt automatically, but this is configurable
   template 'tweet_results' => {
@@ -78,7 +63,7 @@ get '/find-tweets/:name' => sub {
   };
 };
 
-get '/user_results/:name1:name2' => sub {
+get '/user_results/:name1&:name2' => sub {
   my $name1 = params->{name1};
   my $name2 = params->{name2};
   my $response = $nt->lookup_users({ screen_name => $name1,$name2 });
@@ -92,6 +77,7 @@ get '/user_results/:name1:name2' => sub {
 };
 
 print "@++++++++++++++++@@@\n";
+# to test out routes & params passing
 get '/hello/:name' => sub {
   my $name = params->{name};
 
