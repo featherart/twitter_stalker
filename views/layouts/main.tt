@@ -12,10 +12,20 @@
     <div class="title"><img src="/images/bird.jpeg">
     Fun with Tweets!</div>
     <nav><ul>
-      <li><a href="#">View tweets for a user</a></li>
-      <li><form><input type="text" placeholder="user name" autofocus="true" length="300"><input type="submit"></form></li>
-      <li><a href="#">Find related users</a></li>
-      <li><form><input type="text" placeholder="second user name"><input type="submit"></form></li>
+      <li><a href="#">View tweets for a user</a>
+      </li>
+      <li><form id="search_tweets" action="/tweets" method="POST">
+            <input type="text" placeholder="user name" id="search_tweets" autofocus="true" length="300">
+            <input type="submit">
+          </form>
+      </li>
+      <li><a href="#">Find related users</a>
+      </li>
+      <li><form id="search_users" action="/users" method="POST">
+        <input type="text" placeholder="second user name" id="search_users">
+        <input type="submit">
+      </form>
+    </li>
     </ul></nav>
   </header>
     
@@ -28,7 +38,8 @@
           </header>
           
           <content>
-            <% content %>   
+            <% content %> 
+            <% $search_term %>  
           </content>
           
         </article>
