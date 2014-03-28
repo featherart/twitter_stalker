@@ -41,10 +41,10 @@ print $nt;
 #print $res;
 print "@@@@@@@@@@@@@@@@@@@\n";
 
-# get '/' => sub {
-#     # template 'index';
-#     template 'hello';
-# };
+get '/' => sub {
+    # template 'index';
+    template 'hello';
+};
 
 true;
 
