@@ -50,14 +50,14 @@ get '/' => sub {
     template 'hello';
 };
 
-get '/find-tweets/:name' => sub {
+get '/find_tweets/:name' => sub {
   # nope
   # my $form = form('find_tweets');
   my $name = params->{name};
   my $response = $nt->search($name);
 
   # Dancer adds .tt automatically, but this is configurable
-  template 'tweet_results' => {
+  template 'find_tweets' => {
       name => $name,
       response => $response
   };
