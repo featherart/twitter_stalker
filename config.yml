@@ -26,3 +26,11 @@ template: "simple"
 #     start_tag: '[%'
 #     end_tag:   '%]'
 
+# this no work :(
+# plugins:
+#   "Auth::Twitter":
+#     consumer_key: "IF2J9JcIzYJrRiVvbtV3cQ"
+#     consumer_secret: "fN1UZFH8HbadqU9aU1gW7HjyniBP9Z4LAfTymtL9nts"
+#     access_token: "54705451-mFrMxeLRPVf2wqmzQ8hqGJyyTDEjnIM6RgWEzO6vg"
+#     access_token_secret: "rD9Oyqs14mJxGQJHBWM0iHudnxj5eRr2vvcNAbEg45ISS"
+#     callback_url: "http://www.lisafeather.com"
