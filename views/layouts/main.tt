@@ -14,8 +14,8 @@
     <nav><ul>
       <li><a href="#">View tweets for a user</a>
       </li>
-      <li><form id="find_tweets" name="find_tweets" action="/find_tweets" method="get">
-            <input type="text" placeholder="user name" id="name" autofocus="true" length="300">
+      <li><form id="find_tweets" name="find_tweets" action="/find_tweets" method="post">
+            <input type="text" name="name" placeholder="user name" id="name" autofocus="true" length="300">
             <input type="submit">
           </form>
       </li>

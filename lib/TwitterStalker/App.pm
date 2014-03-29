@@ -41,8 +41,8 @@ get '/' => sub {
     template 'hello';
 };
 
-get '/find_tweets/:name' => sub {
-#get '/find_tweets' => sub {
+#get '/find_tweets/:name' => sub {
+post '/find_tweets' => sub {
   # nope, need a form module, couldn't get it
   #my $form = form('find_tweets');
 
