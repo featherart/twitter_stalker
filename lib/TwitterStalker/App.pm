@@ -4,6 +4,7 @@ use Net::Twitter::Lite::WithAPIv1_1;
 use Scalar::Util 'blessed';
 use Data::Dumper;
 use Template;
+use Array::Utils qw(:all);
 
 our $VERSION = '0.1';
 my $consumer_key = $ENV{'TWITTER_KEY'};
@@ -26,10 +27,10 @@ my $nt = Net::Twitter::Lite::WithAPIv1_1->new(
 print "*******************\n";
 #my $doh = $nt->lookup_users({ screen_name => 'featherart,hansflorine' });
 #my $doh = $nt->list_statuses(screen_name =>'featherart');
-my $doh = $nt->friends_list({ screen_name => 'featherart' });
+#my $doh = $nt->friends_list({ screen_name => 'featherart' });
 # my $doh = $nt->lookup_users({ screen_name => $name });
 #my $doh = $nt->lookup_users({ screen_name => 'featherart' });
-print Dumper $doh;
+#print Dumper $doh;
    
 get '/' => sub {
     # default welcome page
@@ -46,7 +47,7 @@ post '/find_tweets' => sub {
   template 'find_tweets' => {
       name => $name,
       response => @r
-    };
+  };
 };
 
 # still need to get query right
@@ -55,19 +56,24 @@ post '/user_results' => sub {
   my $name2 = params->{name2};
   
   # this just looks them up
-  my @r = eval { $nt->lookup_users({ screen_name => $name1. ", ".$name2 }) };
+  #my @r = eval { $nt->lookup_users({ screen_name => $name1. ", ".$name2 }) };
   # these just break everything
   #my @r= eval { $nt->follows($name1, $name2) };
   #my $r = $nt->show_relationship($name1, $name2);
   #my $r = $nt->show_relationship(); 
+  # this works but will require a 2nd query :(
   my @r = eval { $nt->friends_list({ screen_name => $name1 }) };
+  my @s = eval { $nt->friends_list({ screen_name => $name2 }) };
+
+  # intersection
+  my @i = intersect(@r, @s);
 
   set template => 'template_toolkit';
 
   template 'user_results' => {
       name1 => $name1,
       name2 => $name2,
-      response => @r
+      response => @i
   };
 };
 

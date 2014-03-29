@@ -2,8 +2,11 @@
 
 <% FOREACH result IN response %>
   <% FOREACH val IN result.value %>
+  <% result.value.screen_name %>
+    <% IF val.screen_name %>
     <div>
-     ☞ <% val.screen_name %><br>
-    </div>    
+     ☞ <% val.screen_name %>
+    </div>  
+    <% END %>  
   <% END %>
  <% END %>
