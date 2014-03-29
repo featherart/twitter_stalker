@@ -41,7 +41,6 @@ get '/' => sub {
     template 'hello';
 };
 
-#get '/find_tweets/:name' => sub {
 post '/find_tweets' => sub {
   # nope, need a form module, couldn't get it
   #my $form = form('find_tweets');
@@ -62,8 +61,8 @@ post '/find_tweets' => sub {
     };
 };
 
-# not the right way to do this, probably
-get '/user_results/:name1&:name2' => sub {
+# still need to get template fixed
+post '/user_results' => sub {
   my $name1 = params->{name1};
   my $name2 = params->{name2};
   my $response = $nt->lookup_users({ screen_name => $name1,$name2 });

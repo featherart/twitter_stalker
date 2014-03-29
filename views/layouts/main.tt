@@ -21,9 +21,9 @@
       </li>
       <li><a href="#">Find related users</a>
       </li>
-      <li><form id="user_results" name="user_results" action="/user_results" method="get">
-        <input type="text" placeholder="first user name" id="name1">
-        <input type="text" placeholder="second user name" id="name2">
+      <li><form id="user_results" name="user_results" action="/user_results" method="post">
+        <input type="text" placeholder="first user name" id="name1" name="name1">
+        <input type="text" placeholder="second user name" id="name2" name="name2">
         <input type="submit">
       </form>
     </li>
