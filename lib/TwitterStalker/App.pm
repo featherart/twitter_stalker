@@ -24,9 +24,9 @@ my $nt = Net::Twitter::Lite::WithAPIv1_1->new(
 #$nt->update('Hello World!');
 
 print "*******************\n";
-#my $doh = $nt->lookup_users({ screen_name => 'featherart,hansflorine' });
+my $doh = $nt->lookup_users({ screen_name => 'featherart,hansflorine' });
 #only prints the users we have in common
-#print Dumper $doh;
+print Dumper $doh;
    
 # this might be a way to at least look at the hash!
 # $Data::Dumper::Sortkeys = \&my_filter;
@@ -65,7 +65,9 @@ post '/find_tweets' => sub {
 post '/user_results' => sub {
   my $name1 = params->{name1};
   my $name2 = params->{name2};
-  my $response = $nt->lookup_users({ screen_name => $name1,$name2 });
+  
+  my $response = $nt->lookup_users({ screen_name => $name1. ", ".$name2 });
+  #my $response = $nt->lookup_users({ screen_name => 'featherart,hansflorine' });
 
   template 'user_results' => {
       name1 => $name1,
