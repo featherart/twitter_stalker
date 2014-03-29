@@ -26,7 +26,10 @@ my $nt = Net::Twitter::Lite::WithAPIv1_1->new(
 print "*******************\n";
 #my $doh = $nt->lookup_users({ screen_name => 'featherart,hansflorine' });
 #my $doh = $nt->list_statuses(screen_name =>'featherart');
-#print Dumper $doh;
+my $doh = $nt->friends_list({ screen_name => 'featherart' });
+# my $doh = $nt->lookup_users({ screen_name => $name });
+#my $doh = $nt->lookup_users({ screen_name => 'featherart' });
+print Dumper $doh;
    
 get '/' => sub {
     # default welcome page
@@ -36,11 +39,8 @@ get '/' => sub {
 post '/find_tweets' => sub {
 
   my $name = params->{name}; 
-  #my @r = eval { $nt->search($name) };
-  #my @r = eval { $nt->lookup_users({ screen_name => $name }) };
   my @r = eval { $nt->user_timeline({ screen_name => $name }) };
 
-  print scalar @r;
   set template => 'template_toolkit';
   
   template 'find_tweets' => {
@@ -49,20 +49,25 @@ post '/find_tweets' => sub {
     };
 };
 
-# still need to get template fixed
+# still need to get query right
 post '/user_results' => sub {
   my $name1 = params->{name1};
   my $name2 = params->{name2};
   
-  #my @r = eval { $nt->lookup_users({ screen_name => $name1. ", ".$name2 }) };
+  # this just looks them up
+  my @r = eval { $nt->lookup_users({ screen_name => $name1. ", ".$name2 }) };
+  # these just break everything
   #my @r= eval { $nt->follows($name1, $name2) };
-  my $r = $nt->show_relationship($name1, $name2);
+  #my $r = $nt->show_relationship($name1, $name2);
+  #my $r = $nt->show_relationship(); 
+  my @r = eval { $nt->friends_list({ screen_name => $name1 }) };
+
   set template => 'template_toolkit';
 
   template 'user_results' => {
       name1 => $name1,
       name2 => $name2,
-      response => $r
+      response => @r
   };
 };
 
