@@ -5,7 +5,7 @@ use Scalar::Util 'blessed';
 use Data::Dumper;
 use Template;
 use Array::Utils qw(:all);
-use List::Compare;
+#use List::Compare;
 use List::MoreUtils qw(zip);
 
 our $VERSION = '0.1';
@@ -27,32 +27,27 @@ my $nt = Net::Twitter::Lite::WithAPIv1_1->new(
 #$nt->update('Hello World!');
 
 print "*********r**********\n";
-#my $doh = $nt->lookup_users({ screen_name => 'featherart,hansflorine' });
-#my $doh = $nt->list_statuses(screen_name =>'featherart');
-#my $doh = $nt->friends_list({ screen_name => 'featherart' });
-# my $doh = $nt->lookup_users({ screen_name => $name });
-#my $doh = $nt->lookup_users({ screen_name => 'featherart' });
-#print Dumper $doh;
-# my @r = eval { $nt->friends_list({ screen_name => 'featherart' }) };
-# my @s = eval { $nt->friends_list({ screen_name => 'hansflorine' }) };
-#my @r = $nt->friends_list({ screen_name => 'featherart' });
-#my @s = $nt->friends_list({ screen_name => 'hansflorine' });
-# print "\@r:  @r\n";
-# print "\@s: @s\n";
-#print Dumper(\@r);
-# my @arr1 = qw/5 8 12 42 99 10/;
-# my @arr2 = qw/10 20 12 18 99 10/;
+# my @arr1 = $nt->friends_list({ screen_name => 'featherart' });
+# my @arr2 = $nt->friends_list({ screen_name => 'hansflorine' });
+my @arr1 = $nt->friends_list({ screen_name => 'featherart' });
+my @arr2 = $nt->friends_list({ screen_name => 'pamelafox' });
 
-# my $lc = List::Compare->new( \@r, \@s );
+# at this point it's still correctly formatted
+# according to data dumper, but causes runtime error  
+my @merged = zip(@arr1, @arr2); 
+#my @unique = keys { map { $_ => 1 } @merged };
 
-# my @arr1Only = $lc->get_Lonly;
-# print "\@arr1 only: @arr1Only\n";
-#my @merged = eval { zip(@r, @s) };
-# my @unique = unique(@merged);
-#my @unique = keys { map { $_ => 1 } @data };
+# this gives the right result set
+# but no longer good format & causes runtime error
+my @unique = eval { unique(@merged) };
+
+# this did not work AT ALL
+# my $lc = List::Compare->new( \@arr1, \@arr2 );
+# my @intersection = $lc->get_intersection;
+
 
 # print "@++++++unique++++++++++@@@\n";
-#print Dumper(\@merged);
+print Dumper(\@unique);
 # print "@++++++++++++++++@@@\n";
 # my $lc = List::Compare->new( {
 #         lists    => [\@r, \@s],
@@ -93,18 +88,24 @@ post '/user_results' => sub {
   my $name1 = params->{name1};
   my $name2 = params->{name2};
   
-  my @r = eval {$nt->friends_list({ screen_name => $name1 })};
-  my @s = $nt->friends_list({ screen_name => $name2 });
+  my @res1 = $nt->friends_list({ screen_name => $name1 });
+  my @res2 = $nt->friends_list({ screen_name => $name2 });
   
-  #my @all = zip(@r, @s);
+  # derp! This returns the correct result set
+  # but I get a weird runtime error that no one on Stack Overflow has seen
+  # Just not sure at all what to do next ...
+  # my @all = zip(@res1, @res2);
   # my @uniq = eval { unique(@all) };
+
+  # my @unique = do { my %seen; grep { !$seen{$_}++ } @all };
 
   set template => 'template_toolkit';
 
   template 'user_results' => {
       name1 => $name1,
       name2 => $name2,
-      response => @r
+      response1 => @res1,
+      response2 => @res2
   };
 };
 

@@ -1,8 +1,17 @@
 <h3>Here are the people <% name1 %> & <% name2 %> both follow:</h3>
 
-<% FOREACH result IN response %>
+<% FOREACH result IN response1 %>
   <% FOREACH val IN result.value %>
-  <% response.value %>
+    <% IF val.screen_name %>
+    <div>
+     ☞ <% val.screen_name %>
+    </div>  
+    <% END %>  
+  <% END %>
+ <% END %>
+
+ <% FOREACH result IN response2 %>
+  <% FOREACH val IN result.value %>
     <% IF val.screen_name %>
     <div>
      ☞ <% val.screen_name %>
