@@ -1,9 +1,11 @@
 <h3>Here are the tweeters in common for <% name1 %> & <% name2 %>:</h3>
 
 <% FOREACH result IN response %>
-  <% IF result.screen_name %>
+* <% result.status.text %>
+  <% IF result.name %>
     <div>
-     ☞ <% result.name %>
+     ☞ <% result.name %><br>
+
     </div>    
   <% END %>
  <% END %>
