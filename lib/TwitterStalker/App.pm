@@ -42,16 +42,9 @@ get '/' => sub {
 };
 
 post '/find_tweets' => sub {
-  # nope, need a form module, couldn't get it
-  #my $form = form('find_tweets');
 
-  my $name = params->{name};
-  #my $name = param "name";
-
+  my $name = params->{name}; 
   my @r = eval { $nt->search($name) };
-    # for my $status ( @{$r->{statuses}} ) {
-    #     print "$status->{text}\n";
-    # }
 
   set template => 'template_toolkit';
   
@@ -66,13 +59,14 @@ post '/user_results' => sub {
   my $name1 = params->{name1};
   my $name2 = params->{name2};
   
-  my $response = $nt->lookup_users({ screen_name => $name1. ", ".$name2 });
-  #my $response = $nt->lookup_users({ screen_name => 'featherart,hansflorine' });
+  my @r = eval { $nt->lookup_users({ screen_name => $name1. ", ".$name2 }) };
+  
+  set template => 'template_toolkit';
 
   template 'user_results' => {
       name1 => $name1,
       name2 => $name2,
-      response => $response
+      response => @r
   };
 };
 
@@ -85,14 +79,6 @@ get '/hello/:name' => sub {
       name => $name,
   };
 };
-
-# print "@++++++++++++++++@@@\n";
-# post '/tweets' => sub {
-#   my $form = form('search_tweets');
-#   my $values = $form->values();
-#   print "here's my form vals: \n";
-#   print $values;
-# };
 
 print "@@@@@@@@@@@@@@@@@@@\n";
 true;

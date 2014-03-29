@@ -1,11 +1,12 @@
 <h3>Here are the tweeters in common for <% name1 %> & <% name2 %>:</h3>
-
-<% FOREACH status IN response %>
-   <% FOREACH val IN status.value %>
-      <% IF val.text %>
-        <div>
-        ☞ <% val.text %> 
-        </div>
-      <% END %>
-   <% END %>
+<% response %>
+<% FOREACH result IN response %>
+  <% FOREACH name IN result %>
+    <% FOREACH screen_id IN name %>
+      <div>
+       * <% screen_id.key.screen_name %><br>
+       ☞ <% name.key %><br>
+      </div>
+    <% END %>
+  <% END %>
  <% END %>
