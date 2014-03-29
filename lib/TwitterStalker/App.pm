@@ -24,18 +24,10 @@ my $nt = Net::Twitter::Lite::WithAPIv1_1->new(
 #$nt->update('Hello World!');
 
 print "*******************\n";
-my $doh = $nt->lookup_users({ screen_name => 'featherart,hansflorine' });
-#only prints the users we have in common
-print Dumper $doh;
-   
-# this might be a way to at least look at the hash!
-# $Data::Dumper::Sortkeys = \&my_filter;
-# my $foo = { map { (ord, "$_$_$_") } 'I'..'Q' };
-# my $bar = { %$foo };
-# my $baz = { reverse %$foo };
-# print Dumper [ $foo, $bar, $baz ];
+#my $doh = $nt->lookup_users({ screen_name => 'featherart,hansflorine' });
 
-print "@@@@@@@@@@@@@@@@@@@\n";
+#print Dumper $doh;
+   
 get '/' => sub {
     # default welcome page
     template 'hello';
