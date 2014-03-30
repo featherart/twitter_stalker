@@ -27,6 +27,7 @@ template: "template_toolkit"
 engines:
         template_toolkit:
             WRAPPER: layouts/main.tt
+            EVAL_PERL: 1
 # engines:
 #   template_toolkit:
 #     start_tag: '[%'
