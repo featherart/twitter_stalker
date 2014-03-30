@@ -7,9 +7,9 @@ use Template;
 use Array::Utils qw(:all);
 #use List::Compare;
 use List::MoreUtils qw(zip);
-#use JSON;
+use JSON;
 use warnings;
-use utf8;
+
 
 our $VERSION = '0.1';
 my $consumer_key = $ENV{'TWITTER_KEY'};
