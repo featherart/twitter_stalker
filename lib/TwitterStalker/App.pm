@@ -7,7 +7,7 @@ use Template;
 use Array::Utils qw(:all);
 #use List::Compare;
 use List::MoreUtils qw(zip);
-use JSON;
+#use JSON;
 use warnings;
 
 
@@ -25,7 +25,25 @@ my $nt = Net::Twitter::Lite::WithAPIv1_1->new(
       access_token_secret => $access_token_secret,
       ssl                 => 1,
 );
+#==========================================
+# test zone 
+my $hr = $nt->friends_list({ screen_name => "featherart" });
 
+# pretty prints hashref
+#print Dumper \$hr; 
+
+# this lists keys, one of which is users
+# foreach my $k (keys %$hr) {
+#   print "$k\n";
+# }
+
+# this gives me an array
+#print $$hr{users}, "\n";
+
+# so why not try this?
+# oh b/c it says Not a SCALAR reference
+print $$$hr{screen_name}, "\n";
+#==========================================
 get '/' => sub {
     # default welcome page
     template 'hello';
@@ -48,8 +66,8 @@ post '/user_results' => sub {
   my $name1 = params->{name1};
   my $name2 = params->{name2};
   
-  my @res1 = $nt->friends_list({ screen_name => $name1 });
-  my @res2 = $nt->friends_list({ screen_name => $name2 });
+  my $res1 = $nt->friends_list({ screen_name => $name1 });
+  my $res2 = $nt->friends_list({ screen_name => $name2 });
   
   set template => 'template_toolkit';
 
@@ -58,8 +76,8 @@ post '/user_results' => sub {
   template 'user_results' => {
       name1 => $name1,
       name2 => $name2,
-      response1 => @res1,
-      response2 => @res2
+      response1 => $res1,
+      response2 => $res2
   };
 };
 
