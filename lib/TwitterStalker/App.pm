@@ -27,7 +27,7 @@ my $nt = Net::Twitter::Lite::WithAPIv1_1->new(
 );
 #==========================================
 # test zone 
-my $hr = $nt->friends_list({ screen_name => "featherart" });
+#my $hr = $nt->friends_list({ screen_name => "featherart" });
 
 # pretty prints hashref
 #print Dumper \$hr; 
@@ -42,7 +42,7 @@ my $hr = $nt->friends_list({ screen_name => "featherart" });
 
 # so why not try this?
 # oh b/c it says Not a SCALAR reference
-print $$$hr{screen_name}, "\n";
+#print $$$hr{screen_name}, "\n";
 #==========================================
 get '/' => sub {
     # default welcome page
@@ -52,13 +52,13 @@ get '/' => sub {
 post '/find_tweets' => sub {
 
   my $name = params->{name}; 
-  my @r = eval { $nt->user_timeline({ screen_name => $name }) };
+  my $r = $nt->user_timeline({ screen_name => $name });
 
   set template => 'template_toolkit';
   
   template 'find_tweets' => {
       name => $name,
-      response => @r
+      response => $r
   };
 };
 
